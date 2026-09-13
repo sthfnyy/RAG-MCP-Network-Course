@@ -8,12 +8,15 @@ mcp = FastMCP(
 
 
 @mcp.tool()
-def alertas_seguranca():
+def alertas_seguranca(nivel: str | None = None):
     """
     Consulta alertas de segurança da rede.
+
+    Args:
+        nivel: nível do alerta. Pode ser alto, medio ou baixo.
     """
 
-    return consultar_alertas_seguranca()
+    return consultar_alertas_seguranca(nivel)
 
 
 if __name__ == "__main__":

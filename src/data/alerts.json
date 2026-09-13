@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "tipo": "trafego_anormal",
+        "nivel": "alto",
+        "descricao": "Volume de tráfego acima do padrão detectado"
+    },
+    {
+        "id": 2,
+        "tipo": "tentativas_login",
+        "nivel": "medio",
+        "descricao": "Múltiplas tentativas de autenticação detectadas"
+    }
+]
