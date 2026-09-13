@@ -1,6 +1,8 @@
 from mcp.server.fastmcp import FastMCP
 
 from src.tools.security import consultar_alertas_seguranca
+from src.tools.performance import consultar_metricas
+
 
 mcp = FastMCP(
     "Network Management MCP"
@@ -17,6 +19,18 @@ def alertas_seguranca(nivel: str | None = None):
     """
 
     return consultar_alertas_seguranca(nivel)
+
+
+@mcp.tool()
+def metricas_rede(equipamento: str | None = None):
+    """
+    Consulta métricas de desempenho da rede.
+
+    Args:
+        equipamento: nome do equipamento.
+    """
+
+    return consultar_metricas(equipamento)
 
 
 if __name__ == "__main__":

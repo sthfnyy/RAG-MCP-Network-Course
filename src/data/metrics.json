@@ -1,0 +1,20 @@
+[
+    {
+        "equipamento": "roteador-01",
+        "latencia_ms": 25,
+        "vazao_mbps": 850,
+        "perda_pacotes_percentual": 1.2
+    },
+    {
+        "equipamento": "roteador-02",
+        "latencia_ms": 80,
+        "vazao_mbps": 620,
+        "perda_pacotes_percentual": 4.5
+    },
+    {
+        "equipamento": "servidor-01",
+        "latencia_ms": 15,
+        "vazao_mbps": 950,
+        "perda_pacotes_percentual": 0.5
+    }
+]
