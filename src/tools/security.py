@@ -1,31 +1,18 @@
 import json
 from pathlib import Path
 
+DATA_FILE = Path(__file__).resolve().parents[1] / "data" / "alerts.json"
+NIVEIS = {"alto", "medio", "baixo"}
 
-def consultar_alertas_seguranca(nivel: str | None = None):
-    """
-    Retorna alertas de segurança simulados.
 
-    Args:
-        nivel: filtra os alertas por nível.
-    """
-
-    arquivo = (
-        Path(__file__)
-        .parent
-        .parent
-        / "data"
-        / "alerts.json"
-    )
-
-    with open(arquivo, "r", encoding="utf-8") as f:
-        alertas = json.load(f)
-
-    if nivel is None:
+def consultar_alertas_seguranca(nivel: str | None = None) -> list[dict]:
+    """Consulta exclusivamente os alertas SIMULADOS do laboratorio."""
+    alertas = json.loads(DATA_FILE.read_text(encoding="utf-8"))
+    if not isinstance(alertas, list):
+        raise ValueError("alerts.json precisa conter uma lista JSON")
+    if nivel is None or not nivel.strip():
         return alertas
-
-    return [
-        alerta
-        for alerta in alertas
-        if alerta["nivel"].lower() == nivel.lower()
-    ]
+    nivel = nivel.strip().casefold()
+    if nivel not in NIVEIS:
+        raise ValueError(f"Nivel invalido: {nivel!r}. Use alto, medio ou baixo.")
+    return [item for item in alertas if item["nivel"].casefold() == nivel]

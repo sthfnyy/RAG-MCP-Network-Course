@@ -1,0 +1,9 @@
+{
+  "tipo": "SIMULACAO",
+  "organizacao": "Universidade ficticia",
+  "segmentos": [
+    {"nome": "Laboratorio", "rede": "192.0.2.0/24"},
+    {"nome": "Servidores", "rede": "198.51.100.0/24"}
+  ],
+  "equipamentos": ["roteador-01", "roteador-02", "servidor-01"]
+}
