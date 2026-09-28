@@ -1,31 +1,15 @@
 import json
 from pathlib import Path
 
+DATA_FILE = Path(__file__).resolve().parents[1] / "data" / "metrics.json"
 
-def consultar_metricas(equipamento: str | None = None):
-    """
-    Retorna métricas de desempenho simuladas.
 
-    Args:
-        equipamento: filtra as métricas por equipamento.
-    """
-
-    arquivo = (
-        Path(__file__)
-        .parent
-        .parent
-        / "data"
-        / "metrics.json"
-    )
-
-    with open(arquivo, "r", encoding="utf-8") as f:
-        metricas = json.load(f)
-
-    if equipamento is None:
+def consultar_metricas(equipamento: str | None = None) -> list[dict]:
+    """Consulta exclusivamente o dataset SIMULADO do laboratorio."""
+    metricas = json.loads(DATA_FILE.read_text(encoding="utf-8"))
+    if not isinstance(metricas, list):
+        raise ValueError("metrics.json precisa conter uma lista JSON")
+    if equipamento is None or not equipamento.strip():
         return metricas
-
-    return [
-        metrica
-        for metrica in metricas
-        if metrica["equipamento"].lower() == equipamento.lower()
-    ]
+    nome = equipamento.strip().casefold()
+    return [item for item in metricas if item["equipamento"].casefold() == nome]
